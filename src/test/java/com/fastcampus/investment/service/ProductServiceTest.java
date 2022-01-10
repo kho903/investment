@@ -37,7 +37,7 @@ class ProductServiceTest {
 
         for (ProductDto products : validProducts) {
             Products getByRepository = productRepository.getById(products.getId());
-            ProductDto productDto = getByRepository.toDto();
+            ProductDto productDto = ProductDto.toDto(getByRepository);
             // have to refactoring -> investedAmount, investedCount 를 이렇게 처리하는 것이 맞는 것일까..?
             productDto.setInvestedAmount(investmentRepository.sumOfInvestedAmount(getByRepository));
             productDto.setInvestedCount(investmentRepository.countByProductAndInvestmentStatus(getByRepository, InvestmentStatus.INVESTED));
