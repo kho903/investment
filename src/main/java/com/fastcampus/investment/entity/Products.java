@@ -28,8 +28,8 @@ public class Products {
     @Column(name = "title")
     private String title;
 
-    @Column(name = "total_invsting_amount")
-    private Long totalInvestingAmount;
+    @Column(name = "total_investing_amount")
+    private Long totalInvestAmount;
 
     @Column(name = "invested_count")
     private Long investedCount;
@@ -45,12 +45,13 @@ public class Products {
 
     public ProductDto toDto() {
         return ProductDto.builder()
+                .id(id)
                 .title(title)
-                .totalInvestingAmount(totalInvestingAmount)
+                .totalInvestAmount(totalInvestAmount)
                 .investedCount(investedCount)
                 .investedAmount(investedAmount)
-                .startedAt(startedAt)
-                .finishedAt(finishedAt)
+                .startedAt(startedAt.toLocalDate())
+                .finishedAt(finishedAt.toLocalDate())
                 .build();
     }
 }

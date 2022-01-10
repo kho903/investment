@@ -26,6 +26,7 @@ import java.time.LocalDateTime;
 public class Investment {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column
     private Long id;
 
     @ManyToOne
