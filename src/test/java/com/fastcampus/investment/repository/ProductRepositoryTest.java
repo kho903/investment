@@ -55,7 +55,7 @@ class ProductRepositoryTest {
             assertAll(
                     () -> assertEquals(products.getId(), getByRepository.getId()),
                     () -> assertEquals(products.getTitle(), getByRepository.getTitle()),
-                    () -> assertEquals(products.getId(), getByRepository.getId()),
+                    () -> assertEquals(products.getTotalInvestAmount(), getByRepository.getTotalInvestAmount()),
                     () -> assertEquals(products.getInvestedAmount(), getByRepository.getInvestedAmount()),
                     () -> assertEquals(products.getInvestedCount(), getByRepository.getInvestedCount()),
                     () -> assertEquals(products.getStartedAt(), getByRepository.getStartedAt()),
