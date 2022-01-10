@@ -1,5 +1,6 @@
 package com.fastcampus.investment.dto;
 
+import com.fastcampus.investment.entity.Investment;
 import com.fastcampus.investment.entity.InvestmentStatus;
 import com.fastcampus.investment.entity.Products;
 import lombok.AllArgsConstructor;
@@ -25,6 +26,8 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 public class InvestmentDto {
 
+    private Long id;
+
     @ManyToOne
     @JoinColumn(name = "product_id")
     private Products product;
@@ -34,4 +37,17 @@ public class InvestmentDto {
     private InvestmentStatus investmentStatus;
 
     private LocalDateTime investedAt;
+
+    private Long userId;
+
+    public static InvestmentDto toDto(Investment investment) {
+        return InvestmentDto.builder()
+                .id(investment.getId())
+                .product(investment.getProduct())
+                .investedAmount(investment.getInvestedAmount())
+                .investmentStatus(investment.getInvestmentStatus())
+                .investedAt(investment.getInvestedAt())
+                .userId(investment.getUserId())
+                .build();
+    }
 }

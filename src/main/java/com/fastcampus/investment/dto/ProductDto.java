@@ -1,5 +1,6 @@
 package com.fastcampus.investment.dto;
 
+import com.fastcampus.investment.entity.Products;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -28,4 +29,16 @@ public class ProductDto {
     private LocalDate startedAt;
 
     private LocalDate finishedAt;
+
+    public static ProductDto toDto(Products products) {
+        return ProductDto.builder()
+                .id(products.getId())
+                .title(products.getTitle())
+                .totalInvestAmount(products.getTotalInvestAmount())
+                .investedCount(products.getInvestedCount())
+                .investedAmount(products.getInvestedAmount())
+                .startedAt(products.getStartedAt().toLocalDate())
+                .finishedAt(products.getFinishedAt().toLocalDate())
+                .build();
+    }
 }
