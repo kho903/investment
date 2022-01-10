@@ -9,3 +9,13 @@ CREATE TABLE products
     finished_at            datetime     NOT NULL,                --투자종료일시
     PRIMARY KEY (id)
 );
+
+CREATE TABLE investment
+(
+    id                  bigint          NOT NULL AUTO_INCREMENT,
+    product_id          bigint          NOT NULL,
+    investedAmount      bigint          NOT NULL,
+    investmentStatus    varchar(100)    NOT NULL,
+    investedAt          datetime        NOT NULL,
+    foreign key (product_id) references products(id)
+);
