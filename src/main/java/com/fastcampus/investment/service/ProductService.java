@@ -25,7 +25,7 @@ public class ProductService {
         List<ProductDto> result = new ArrayList<>();
 
         for (Products products : productsList) {
-            ProductDto productDto = products.toDto();
+            ProductDto productDto = ProductDto.toDto(products);
             productDto.setInvestedAmount(investmentRepository.sumOfInvestedAmount(products));
             productDto.setInvestedCount(investmentRepository.countByProductAndInvestmentStatus(products, InvestmentStatus.INVESTED));
             result.add(productDto);
