@@ -7,7 +7,7 @@ import org.springframework.http.HttpStatus;
 @Getter
 @Setter
 @AllArgsConstructor
-public class ProductResponse<T> {
+public class Response<T> {
     private T data;
     private HttpStatus status;
 }

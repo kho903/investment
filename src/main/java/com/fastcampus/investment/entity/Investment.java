@@ -1,5 +1,6 @@
 package com.fastcampus.investment.entity;
 
+import com.fastcampus.investment.dto.InvestmentDto;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -42,4 +43,8 @@ public class Investment {
 
     @Column
     private LocalDateTime investedAt;
+
+    @Column
+    private Long userId;
+
 }

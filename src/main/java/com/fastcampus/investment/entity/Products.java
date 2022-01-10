@@ -43,15 +43,4 @@ public class Products {
     @Column(name = "finished_at")
     private LocalDateTime finishedAt;
 
-    public ProductDto toDto() {
-        return ProductDto.builder()
-                .id(id)
-                .title(title)
-                .totalInvestAmount(totalInvestAmount)
-                .investedCount(investedCount)
-                .investedAmount(investedAmount)
-                .startedAt(startedAt.toLocalDate())
-                .finishedAt(finishedAt.toLocalDate())
-                .build();
-    }
 }
