@@ -14,8 +14,9 @@ CREATE TABLE investment
 (
     id                  bigint          NOT NULL AUTO_INCREMENT,
     product_id          bigint          NOT NULL,
-    investedAmount      bigint          NOT NULL,
-    investmentStatus    varchar(100)    NOT NULL,
-    investedAt          datetime        NOT NULL,
+    invested_amount      bigint          NOT NULL,
+    investment_status    varchar(100)    NOT NULL,
+    invested_at          datetime        NOT NULL,
+    user_id             bigint,
     foreign key (product_id) references products(id)
 );
