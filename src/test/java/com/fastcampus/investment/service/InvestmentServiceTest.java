@@ -1,7 +1,6 @@
 package com.fastcampus.investment.service;
 
 import com.fastcampus.investment.dto.InvestmentDto;
-import com.fastcampus.investment.dto.ProductDto;
 import com.fastcampus.investment.entity.Investment;
 import com.fastcampus.investment.entity.InvestmentStatus;
 import com.fastcampus.investment.entity.Products;
@@ -37,7 +36,7 @@ class InvestmentServiceTest {
         Investment investment = Investment.builder()
                 .id(1L)
                 .userId(1L)
-                .investmentStatus(InvestmentStatus.INVESTED)
+                .status(InvestmentStatus.INVESTED)
                 .investedAt(LocalDateTime.now())
                 .investedAmount(0L)
                 .product(products)
@@ -46,7 +45,7 @@ class InvestmentServiceTest {
         Investment investment2 = Investment.builder()
                 .id(2L)
                 .userId(1L)
-                .investmentStatus(InvestmentStatus.INVESTED)
+                .status(InvestmentStatus.INVESTED)
                 .investedAt(LocalDateTime.now())
                 .investedAmount(0L)
                 .product(products)
@@ -61,20 +60,16 @@ class InvestmentServiceTest {
                 () -> assertEquals(getInvestmentList.size(), 2),
                 () -> assertEquals(getInvestmentList.get(0).getId(), investment.getId()),
                 () -> assertEquals(getInvestmentList.get(1).getId(), investment2.getId()),
-                () -> assertEquals(getInvestmentList.get(0).getInvestmentStatus(), investment.getInvestmentStatus()),
-                () -> assertEquals(getInvestmentList.get(1).getInvestmentStatus(), investment2.getInvestmentStatus()),
+                () -> assertEquals(getInvestmentList.get(0).getStatus(), investment.getStatus()),
+                () -> assertEquals(getInvestmentList.get(1).getStatus(), investment2.getStatus()),
                 () -> assertEquals(getInvestmentList.get(0).getInvestedAmount(), investment.getInvestedAmount()),
                 () -> assertEquals(getInvestmentList.get(1).getInvestedAmount(), investment2.getInvestedAmount()),
                 () -> assertEquals(getInvestmentList.get(0).getInvestedAt(), investment.getInvestedAt()),
                 () -> assertEquals(getInvestmentList.get(1).getInvestedAt(), investment2.getInvestedAt()),
                 () -> assertEquals(getInvestmentList.get(0).getProduct().getId(), investment.getProduct().getId()),
                 () -> assertEquals(getInvestmentList.get(1).getProduct().getId(), investment2.getProduct().getId()),
-                () -> assertEquals(getInvestmentList.get(0).getProduct().getInvestedCount(), investment.getProduct().getInvestedCount()),
-                () -> assertEquals(getInvestmentList.get(1).getProduct().getInvestedCount(), investment2.getProduct().getInvestedCount()),
                 () -> assertEquals(getInvestmentList.get(0).getProduct().getTitle(), investment.getProduct().getTitle()),
                 () -> assertEquals(getInvestmentList.get(1).getProduct().getTitle(), investment2.getProduct().getTitle()),
-                () -> assertEquals(getInvestmentList.get(0).getProduct().getInvestedAmount(), investment.getProduct().getInvestedAmount()),
-                () -> assertEquals(getInvestmentList.get(1).getProduct().getInvestedAmount(), investment2.getProduct().getInvestedAmount()),
                 () -> assertEquals(getInvestmentList.get(0).getProduct().getStartedAt(), investment.getProduct().getStartedAt()),
                 () -> assertEquals(getInvestmentList.get(1).getProduct().getStartedAt(), investment2.getProduct().getStartedAt()),
                 () -> assertEquals(getInvestmentList.get(0).getProduct().getFinishedAt(), investment.getProduct().getFinishedAt()),
@@ -88,8 +83,6 @@ class InvestmentServiceTest {
                 .id(5L)
                 .title("첫번째 제품")
                 .totalInvestAmount(0L)
-                .investedCount(0L)
-                .investedAmount(0L)
                 .startedAt(LocalDateTime.now().minusDays(1))
                 .finishedAt(LocalDateTime.now().plusDays(1))
                 .build();

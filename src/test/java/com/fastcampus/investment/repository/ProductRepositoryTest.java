@@ -31,8 +31,6 @@ class ProductRepositoryTest {
                 .id(5L)
                 .title("첫번째 제품")
                 .totalInvestAmount(0L)
-                .investedCount(0L)
-                .investedAmount(0L)
                 .startedAt(LocalDateTime.now().minusDays(1))
                 .finishedAt(LocalDateTime.now().plusDays(1))
                 .build();
@@ -56,8 +54,6 @@ class ProductRepositoryTest {
                     () -> assertEquals(products.getId(), getByRepository.getId()),
                     () -> assertEquals(products.getTitle(), getByRepository.getTitle()),
                     () -> assertEquals(products.getTotalInvestAmount(), getByRepository.getTotalInvestAmount()),
-                    () -> assertEquals(products.getInvestedAmount(), getByRepository.getInvestedAmount()),
-                    () -> assertEquals(products.getInvestedCount(), getByRepository.getInvestedCount()),
                     () -> assertEquals(products.getStartedAt(), getByRepository.getStartedAt()),
                     () -> assertEquals(products.getFinishedAt(), getByRepository.getFinishedAt())
             );
