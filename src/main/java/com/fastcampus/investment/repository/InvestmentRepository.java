@@ -10,9 +10,9 @@ import java.util.List;
 
 public interface InvestmentRepository extends JpaRepository<Investment, Long> {
 
-    Long countByProductAndInvestmentStatus(Products products, InvestmentStatus investmentStatus);
+    Long countByProductAndStatus(Products products, InvestmentStatus investmentStatus);
 
-    @Query("select COALESCE(sum(i.investedAmount), 0) from Investment i where i.product.id = :#{#product.id}")
+    @Query("select COALESCE(sum(i.investedAmount), 0) from Investment i where i.product.id = :#{#product.id} and i.status = 'INVESTED'")
     Long sumOfInvestedAmount(Products product);
 
     List<Investment> findByUserId(Long userId);
