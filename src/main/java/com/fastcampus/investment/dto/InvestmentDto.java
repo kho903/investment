@@ -34,7 +34,7 @@ public class InvestmentDto {
 
     private Long investedAmount;
 
-    private InvestmentStatus investmentStatus;
+    private InvestmentStatus status;
 
     private LocalDateTime investedAt;
 
@@ -45,7 +45,7 @@ public class InvestmentDto {
                 .id(investment.getId())
                 .product(investment.getProduct())
                 .investedAmount(investment.getInvestedAmount())
-                .investmentStatus(investment.getInvestmentStatus())
+                .status(investment.getStatus())
                 .investedAt(investment.getInvestedAt())
                 .userId(investment.getUserId())
                 .build();

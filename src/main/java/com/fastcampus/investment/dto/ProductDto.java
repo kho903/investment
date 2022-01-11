@@ -35,8 +35,6 @@ public class ProductDto {
                 .id(products.getId())
                 .title(products.getTitle())
                 .totalInvestAmount(products.getTotalInvestAmount())
-                .investedCount(products.getInvestedCount())
-                .investedAmount(products.getInvestedAmount())
                 .startedAt(products.getStartedAt().toLocalDate())
                 .finishedAt(products.getFinishedAt().toLocalDate())
                 .build();
