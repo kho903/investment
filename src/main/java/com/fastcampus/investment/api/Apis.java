@@ -2,16 +2,19 @@ package com.fastcampus.investment.api;
 
 import com.fastcampus.investment.dto.InvestmentDto;
 import com.fastcampus.investment.dto.ProductDto;
+import com.fastcampus.investment.entity.InvestmentStatus;
 import com.fastcampus.investment.entity.Response;
+import com.fastcampus.investment.exception.NotFoundInvestmentException;
 import com.fastcampus.investment.exception.NotFoundProductException;
 import com.fastcampus.investment.service.InvestmentService;
 import com.fastcampus.investment.service.ProductService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -27,8 +30,8 @@ public class Apis {
     private final ProductService productService;
     private final InvestmentService investmentService;
 
-    @ExceptionHandler(NotFoundProductException.class)
-    public Response<?> handlerNotFoundProductException(NotFoundProductException exception) {
+    @ExceptionHandler({NotFoundProductException.class, NotFoundInvestmentException.class})
+    public Response<?> handlerNotFoundProductException(Exception exception) {
         return new Response<>(exception.getMessage(), HttpStatus.BAD_REQUEST);
     }
 
@@ -52,5 +55,15 @@ public class Apis {
     ) {
         InvestmentDto invest = investmentService.invest(userId, productId, investAmount);
         return new Response<>(invest, HttpStatus.OK);
+    }
+
+    @PutMapping("/investment/{investmentId}")
+    public Response<?> updateInvest(
+            @RequestHeader("X-USER-ID") Long userId,
+            @PathVariable Long investmentId,
+            @RequestParam InvestmentStatus status
+            ) {
+        InvestmentDto investment = investmentService.updateInvestment(userId, investmentId, status);
+        return new Response<>(investment, HttpStatus.OK);
     }
 }

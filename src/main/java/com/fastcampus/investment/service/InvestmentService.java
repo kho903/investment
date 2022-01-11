@@ -4,14 +4,12 @@ import com.fastcampus.investment.dto.InvestmentDto;
 import com.fastcampus.investment.entity.Investment;
 import com.fastcampus.investment.entity.InvestmentStatus;
 import com.fastcampus.investment.entity.Products;
+import com.fastcampus.investment.exception.NotFoundInvestmentException;
 import com.fastcampus.investment.exception.NotFoundProductException;
 import com.fastcampus.investment.repository.InvestmentRepository;
 import com.fastcampus.investment.repository.ProductRepository;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.ExceptionHandler;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -52,5 +50,18 @@ public class InvestmentService {
                 .build();
         Investment savedInvest = investmentRepository.save(investment);
         return InvestmentDto.toDto(savedInvest);
+    }
+
+    public InvestmentDto updateInvestment(Long userId, Long investmentId, InvestmentStatus status) {
+        Investment investment = investmentRepository.findById(investmentId)
+                .orElseThrow(() -> new NotFoundInvestmentException("해당 ID의 투자정보를 찾을 수 없습니다."));
+
+        if (!investment.getUserId().equals(userId)) {
+            throw new NotFoundInvestmentException("userId가 일치하는 투자정보가 없습니다.");
+        }
+
+        investment.setStatus(status);
+        Investment updateInvest = investmentRepository.save(investment);
+        return InvestmentDto.toDto(updateInvest);
     }
 }
