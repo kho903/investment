@@ -1,12 +1,20 @@
 package com.fastcampus.investment.api;
 
+import com.fastcampus.investment.dto.InvestmentDto;
 import com.fastcampus.investment.dto.ProductDto;
-import com.fastcampus.investment.entity.ProductResponse;
+import com.fastcampus.investment.entity.Response;
+import com.fastcampus.investment.exception.NotFoundProductException;
+import com.fastcampus.investment.service.InvestmentService;
 import com.fastcampus.investment.service.ProductService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
@@ -17,10 +25,32 @@ import java.util.List;
 public class Apis {
 
     private final ProductService productService;
+    private final InvestmentService investmentService;
+
+    @ExceptionHandler(NotFoundProductException.class)
+    public Response<?> handlerNotFoundProductException(NotFoundProductException exception) {
+        return new Response<>(exception.getMessage(), HttpStatus.BAD_REQUEST);
+    }
 
     @GetMapping("/product")
-    public ProductResponse<?> getAllProduct() {
+    public Response<?> getAllProduct() {
         List<ProductDto> validProducts = productService.getValidProducts();
-        return new ProductResponse<>(validProducts, HttpStatus.OK);
+        return new Response<>(validProducts, HttpStatus.OK);
+    }
+
+    @GetMapping("/investment")
+    public Response<?> getInvestment(@RequestHeader("X-USER-ID") Long userId) {
+        List<InvestmentDto> investment = investmentService.getInvestment(userId);
+        return new Response<>(investment, HttpStatus.OK);
+    }
+
+    @PostMapping("/investment")
+    public Response<?> doInvest(
+            @RequestHeader("X-USER-ID") Long userId,
+            @RequestParam Long productId,
+            @RequestParam Long investAmount
+    ) {
+        InvestmentDto invest = investmentService.invest(userId, productId, investAmount);
+        return new Response<>(invest, HttpStatus.OK);
     }
 }
