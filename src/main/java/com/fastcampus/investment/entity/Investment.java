@@ -39,7 +39,7 @@ public class Investment {
 
     @Column
     @Enumerated(EnumType.STRING)
-    private InvestmentStatus investmentStatus;
+    private InvestmentStatus status;
 
     @Column
     private LocalDateTime investedAt;

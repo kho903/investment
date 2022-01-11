@@ -6,6 +6,7 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.ToString;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -20,6 +21,7 @@ import java.time.LocalDateTime;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
+@ToString
 public class Products {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -30,12 +32,6 @@ public class Products {
 
     @Column(name = "total_investing_amount")
     private Long totalInvestAmount;
-
-    @Column(name = "invested_count")
-    private Long investedCount;
-
-    @Column(name = "invested_amount")
-    private Long investedAmount;
 
     @Column(name = "started_at")
     private LocalDateTime startedAt;
