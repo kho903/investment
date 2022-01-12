@@ -31,7 +31,7 @@ public class Apis {
     private final InvestmentService investmentService;
 
     @ExceptionHandler({NotFoundProductException.class, NotFoundInvestmentException.class})
-    public Response<?> handlerNotFoundProductException(Exception exception) {
+    public Response<?> handlerNotFoundException(Exception exception) {
         return new Response<>(exception.getMessage(), HttpStatus.BAD_REQUEST);
     }
 
