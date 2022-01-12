@@ -44,11 +44,6 @@ class ProductRepositoryTest {
         List<Products> result = productRepository.findByStartedAtBeforeAndFinishedAtAfter(LocalDateTime.now(), LocalDateTime.now());
 
         for (Products products : result) {
-            System.out.println("products.getId() = " + products.getId());
-            System.out.println("products.getTitle() = " + products.getTitle());
-        }
-
-        for (Products products : result) {
             Products getByRepository = productRepository.getById(products.getId());
             assertAll(
                     () -> assertEquals(products.getId(), getByRepository.getId()),
